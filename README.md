@@ -217,8 +217,6 @@ Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该
 　　只需添加Master节点 否则报错：Exception in thread "main" redis.clients.jedis.exceptions.JedisClusterException: CLUSTERDOWN The cluster is down
 
 2当用sentinel切换主从是有可能由于误操作导致节点中槽的分布不均 或混乱
-
-　　在redis-cli 上执行命令　　
 ```
 　　[root@weiguoyuan src]# redis-cli -c -p 6379
 　　127.0.0.1:6379> cluster nodes　　
