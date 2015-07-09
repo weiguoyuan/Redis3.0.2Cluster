@@ -1,0 +1,26 @@
+2015-05-11 15:44:01,815 [main] INFO  [com.wandoulabs.jodis.RoundRobinJedisPool] - Add new proxy: weiguoyuan:19000
+ 2015-05-11 15:44:02,067 [main] INFO  [Redis] - 执行saveToRedisWithKey方法
+ 2015-05-11 15:44:02,067 [main] INFO  [Redis] - 存入前时间1431330242067
+ 2015-05-11 15:44:02,116 [main] INFO  [Redis] - 存入后时间1431330242116
+ 2015-05-11 15:44:02,116 [main] INFO  [Redis] - 返回的key值1234
+ 2015-05-11 15:44:02,117 [main] INFO  [Redis] - 执行getFromRedis方法
+ 2015-05-11 15:44:02,117 [main] INFO  [Redis] - 得到的key：1234
+ 2015-05-11 15:44:02,117 [main] INFO  [Redis] - 操作前时间1431330242117
+ 2015-05-11 15:44:02,135 [main] INFO  [Redis] - 得到后时间1431330242135
+ 2015-05-11 15:44:02,136 [main] INFO  [Redis] - 得到的第1组key: 1-->value: 2
+ 2015-05-11 15:51:40,702 [main] INFO  [com.wandoulabs.jodis.RoundRobinJedisPool] - Add new proxy: weiguoyuan:19000
+ 2015-05-11 15:51:40,942 [main] INFO  [Redis] - 执行saveToRedisWithKey方法
+ 2015-05-11 15:51:40,943 [main] INFO  [Redis] - 存入前时间1431330700943
+ 2015-05-11 15:51:40,958 [main] INFO  [Redis] - 存入后时间1431330700958
+ 2015-05-11 15:51:40,959 [main] INFO  [Redis] - 返回的key值1234
+ 2015-05-11 15:51:40,959 [main] INFO  [Redis] - 执行getFromRedis方法
+ 2015-05-11 15:51:40,959 [main] INFO  [Redis] - 得到的key：1234
+ 2015-05-11 15:51:40,959 [main] INFO  [Redis] - 操作前时间1431330700959
+ 2015-05-11 15:51:40,977 [main] INFO  [Redis] - 得到后时间1431330700977
+ 2015-05-11 15:51:40,977 [main] INFO  [Redis] - 得到的第1组key: 1-->value: 2
+ 2015-05-11 15:51:40,977 [main] INFO  [Redis] - 执行deleteFromRedis方法
+ 2015-05-11 15:51:40,978 [main] INFO  [Redis] - 执行existsKey方法
+ 2015-05-11 15:51:40,978 [main] INFO  [Redis] - existsKey方法得到的key 1234
+ 2015-05-11 15:51:40,980 [main] INFO  [Redis] - 删除前时间1431330700980
+ 2015-05-11 15:51:40,982 [main] INFO  [Redis] - 删除后时间1431330700982
+ 2015-05-11 15:51:40,983 [main] INFO  [Redis] - deleteFromRedis方法的返回值1
