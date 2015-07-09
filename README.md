@@ -15,7 +15,7 @@
 　　下载地址  http://rubygems.org/gems/redis/versions/3.2.1
 
 　　上面的地址有可能访问不了或下载不了（墙的原因） 可以在csdn上下载 下载地址http://download.csdn.net/download/lihcc/8722699 解压后     
-
+```
 　　[root@weiguoyuan Downloads]# unzip redis-3.2.1.zip 
 　　Archive: redis-3.2.1.zip
 　　inflating: redis-3.2.1.gem
@@ -25,9 +25,9 @@
     Parsing documentation for redis-3.2.1
     Installing ri documentation for redis-3.2.1
     1 gem installed
-
+```
 3安装Redis3.0.2
-
+```
 　　wget http://download.redis.io/releases/redis-3.0.2.tar.gz
 
 　　tar xzf redis-3.0.2.tar.gz
@@ -35,9 +35,9 @@
 　　cd redis-3.0.2
 
 　　make
-
+```
 4在两个机器上分别建立 6379 6380 6381 文件夹
-
+```
 　　[root@weiguoyuan redis-3.0.2]# mkdir 6379 6380 6381
 
 　　[root@weiguoyuan redis-3.0.2]# cp redis.conf 6379
@@ -45,15 +45,16 @@
 　　[root@weiguoyuan redis-3.0.2]# cp redis.conf 6380
 
 　　[root@weiguoyuan redis-3.0.2]# cp redis.conf 6381
-
+```
 5修改Redis配置文件
-
+```
 　port 6379
 　appendonly yes #这个是开启aof日志持久化
   cluster-enabled yes 　
   cluster-config-file nodes.conf
   cluster-node-timeout 5000
   分别修改端口 6380 6381 nodes.conf 也修改成相应端口号
+```  
 6分别启动两个机器的Redis实例
 
 　　[root@weiguoyuan src]# ./redis-server ../6379/redis.conf
@@ -61,7 +62,7 @@
 　　分别换成相应的端口
 
 7启动集群　
-
+```
 　　[root@weiguoyuan src]# ./redis-trib.rb create --replicas 1 10.64.4.57:6379 10.64.4.57:6380 10.64.4.57:6381 10.64.4.95:6379 10.64.4.95:6380 10.64.4.95:6381
 　　>>> Creating cluster
 　　Connecting to node 10.64.4.57:6379: OK
@@ -118,7 +119,7 @@
 　　>>> Check slots coverage...
 　　[OK] All 16384 slots covered.
 　　[root@weiguoyuan src]#
-
+```
 #Redis主从切换 Sentinel
 
 Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该系统执行以下三个任务：
@@ -126,16 +127,17 @@ Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该
 监控（Monitoring）： Sentinel 会不断地检查你的主服务器和从服务器是否运作正常。
 提醒（Notification）： 当被监控的某个 Redis 服务器出现问题时， Sentinel 可以通过 API 向管理员或者其他应用程序发送通知。
 自动故障迁移（Automatic failover）： 当一个主服务器不能正常工作时， Sentinel 会开始一次自动故障迁移操作， 它会将失效主服务器的其中一个从服务器升级为新的主服务器， 并让失效主服务器的其他从服务器改为复制新的主服务器； 当客户端试图连接失效的主服务器时， 集群也会向客户端返回新主服务器的地址， 使得集群可以使用新主服务器代替失效服务器。
-1在两个机器上分别建26379 26380 文件夹
 
+1在两个机器上分别建26379 26380 文件夹
+```
 　　[root@weiguoyuan redis-3.0.2]# mkdir 26379 26380
 
 　　[root@weiguoyuan redis-3.0.2]# cp sentinel.conf ./26379
 
 　　[root@weiguoyuan redis-3.0.2]# cp sentinel.conf ./26380
-
+```
 2修改配置文件　
-
+```
 　 port 26379
 　　sentinel monitor weiguoyuan 10.64.4.57 6379 2
 
@@ -169,14 +171,14 @@ Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该
 　　Reading the configuration file, at line 181
 　　>>> 'sentinel monitor weiguoyuan 10.64.4.57 6380 2'
 　　Duplicated master name.
-
+```
 3sentinel监控redis实例
-
+```
 10.64.4.57 	                                       10.64.4.95
 26379 监控实例 10.64.4.57：6379  10.64.4.95：6379	 26379 监控实例 10.64.4.57：6379  10.64.4.95：6379
 26380 监控实例 10.64.4.57：6380  10.64.4.95：6379	 26380 监控实例 10.64.4.57：6380
 26381 监控实例 10.64.4.57：6379 	                 26381 监控实例 10.64.4.57：6380
- 
+```
 
 　　这样每个Master有3个sentinel监控 2个sentinel发现Master down后开始主从切换
 
@@ -185,7 +187,7 @@ Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该
 主从切换出现的问题
 
 1关于Redis的java客户端jedis的JedisCluster添加集群节点问题
-
+```
 　　import java.util.HashSet;
 　　import java.util.Set;
 
@@ -212,13 +214,13 @@ Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该
 　　　　　　}
 
 　　}
-
+```
 　　只需添加Master节点 否则报错：Exception in thread "main" redis.clients.jedis.exceptions.JedisClusterException: CLUSTERDOWN The cluster is down
 
 2当用sentinel切换主从是有可能由于误操作导致节点中槽的分布不均 或混乱
 
 　　在redis-cli 上执行命令　　
-
+```
 　　[root@weiguoyuan src]# redis-cli -c -p 6379
 　　127.0.0.1:6379> cluster nodes　　
 
@@ -229,7 +231,7 @@ ae6435077b3e1e46bed24f3ad30b041a48f61820 10.64.4.95:6380 slave c388f25478cb6707c
 31ae60f5c6d35af60da4e31cb21bff1e529c53a6 10.64.4.57:6380 master - 0 1436405568223 2 connected 10923-16383
 e921e197d25f15ab5b2616a639471f66b62ed2c7 10.64.4.95:6379 slave d4b58277d78b9a990a18074129156d8533894c6b 0 1436405569279 12 connected
 127.0.0.1:6379>
-
+```
  
 
 发现5462槽混乱客户端也报错 Exception in thread "main" java.lang.NumberFormatException: For input string: "[5462"
@@ -247,11 +249,11 @@ nodes-6379.conf nodes-6380.conf nodes-6381.conf
 　　flushall
 
 3重启下虚拟机 重新执行
-
+```
 　　[root@weiguoyuan src]# ./redis-trib.rb create --replicas 1 10.64.4.57:6379 10.64.4.57:6380 10.64.4.57:6381 10.64.4.95:6379 10.64.4.95:6380 10.64.4.95:6381
-
+```
 4查看节点状态
-
+```
 　　[root@weiguoyuan src]# ./redis-cli -c -p 6379
 　　127.0.0.1:6379> cluster nodes
 　　1688ccdbab239e514577fdffd87344ea84481263 10.64.4.57:6381 slave 16c7fb8a9d4c63b7c0712bbaae4bb70e9a24b90d 0 1436416916290 4 connected
@@ -261,7 +263,7 @@ nodes-6379.conf nodes-6380.conf nodes-6381.conf
 　　6e6bad30189c628c4ffe356c191b9ae3e970cfd5 10.64.4.57:6380 master - 0 1436416916816 2 connected 10923-16383
 　　73d80a7eb6a44136f606e4829b9954b0e0c8d4ea 10.64.4.95:6380 slave eeb64c309774f05661741c14fb8875297b217f0a 0 1436416915782 5 connected
 　　127.0.0.1:6379>
-
+```
  　　
 
 #在线扩容 数据迁移
