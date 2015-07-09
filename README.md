@@ -1,4 +1,4 @@
-Redis 3.0 集群搭建
+#Redis 3.0 集群搭建
 
 开启两个虚拟机 分别在两个虚拟机上开启3个Redis实例 3主3从两个虚拟机里的实例互为主备
 
@@ -119,7 +119,7 @@ Redis 3.0 集群搭建
 　　[OK] All 16384 slots covered.
 　　[root@weiguoyuan src]#
 
-Redis主从切换 Sentinel
+#Redis主从切换 Sentinel
 
 Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该系统执行以下三个任务：
 
@@ -264,11 +264,11 @@ nodes-6379.conf nodes-6380.conf nodes-6381.conf
 
  　　
 
-在线扩容 数据迁移
+#在线扩容 数据迁移
 
 使用redis-trib.rb工具 具体看第一个参考连接
 
-参考
+#参考
 
 http://hot66hot.iteye.com/blog/2050676
 
