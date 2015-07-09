@@ -183,7 +183,7 @@ Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该
 
 　　参考：http://redisdoc.com/topic/sentinel.html 
 
-    主从切换出现的问题
+#主从切换出现的问题
 
 1关于Redis的java客户端jedis的JedisCluster添加集群节点问题
 ```
